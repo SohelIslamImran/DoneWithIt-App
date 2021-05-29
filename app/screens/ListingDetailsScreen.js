@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+
 import ListItem from "../components/ListItem";
 
 const ListingDetailsScreen = () => {
