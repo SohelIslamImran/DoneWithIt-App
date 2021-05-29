@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textInput: {
-    width: "100%",
+    flex: 1,
   },
 });
