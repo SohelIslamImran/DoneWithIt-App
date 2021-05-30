@@ -30,7 +30,7 @@ const [category, setCategory] = useState(categories[0]);
     </Screen> */
 
 export default function App() {
-  return <MessageScreen />;
+  return <ListingEditScreen />;
 }
 
 const styles = StyleSheet.create({});

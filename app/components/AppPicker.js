@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
+  View,
   Button,
   FlatList,
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
-  View,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -16,16 +16,19 @@ import PickerItem from "./PickerItem";
 const AppPicker = ({
   icon,
   items,
+  numberOfColumns = 1,
+  PickerItemComponent = PickerItem,
   placeholder,
   onSelectItem,
   selectedItem,
+  width = "100%",
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -51,9 +54,10 @@ const AppPicker = ({
         <FlatList
           data={items}
           keyExtractor={({ value }) => value.toString()}
+          numColumns={numberOfColumns}
           renderItem={({ item }) => (
-            <PickerItem
-              label={item.label}
+            <PickerItemComponent
+              item={item}
               onPress={() => {
                 onSelectItem(item);
                 setModalVisible(false);
@@ -70,7 +74,6 @@ export default AppPicker;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flexDirection: "row",
     backgroundColor: colors.light,
     borderRadius: 25,

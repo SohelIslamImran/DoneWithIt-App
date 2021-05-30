@@ -48,14 +48,14 @@ const MessageScreen = () => {
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-          setMessages = [
+          setMessages([
             {
               id: 2,
               title: "T2",
               description: "D2",
               image: require("../assets/logo-red.png"),
             },
-          ];
+          ]);
         }}
       />
     </Screen>
