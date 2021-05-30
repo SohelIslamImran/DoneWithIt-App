@@ -5,6 +5,7 @@ import AppPicker from "./app/components/AppPicker";
 import AppTextInput from "./app/components/AppTextInput";
 import Screen from "./app/components/Screen";
 import AccountScreen from "./app/screens/AccountScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import MessageScreen from "./app/screens/MessageScreen";
@@ -29,7 +30,7 @@ const [category, setCategory] = useState(categories[0]);
     </Screen> */
 
 export default function App() {
-  return <LoginScreen />;
+  return <MessageScreen />;
 }
 
 const styles = StyleSheet.create({});
