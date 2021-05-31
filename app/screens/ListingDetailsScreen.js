@@ -2,17 +2,24 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 import { ListItem } from "../components/lists";
+import colors from "../config/colors";
 
-const ListingDetailsScreen = () => {
+const ListingDetailsScreen = ({ route }) => {
+  const listing = route.params;
+
   return (
     <View>
-      <Image source />
+      <Image style={styles.image} source={listing.image} />
       <View style={styles.details}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.price}>{subTitle}</AppText>
-      </View>
-      <View style={styles.userContainer}>
-        <ListItem title subTitle image />
+        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.price}>${listing.price}</Text>
+        <View style={styles.userContainer}>
+          <ListItem
+            image={require("../assets/me.png")}
+            title="Sohel Islam Imran"
+            subTitle="5 Listings"
+          />
+        </View>
       </View>
     </View>
   );
@@ -31,12 +38,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "500",
-    marginBottom: 7,
+    //marginBottom: 7,
   },
   price: {
     fontSize: 20,
     color: colors.secondary,
     fontWeight: "bold",
+    marginVertical: 10,
   },
   userContainer: {
     marginVertical: 40,
