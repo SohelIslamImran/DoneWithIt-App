@@ -7,7 +7,7 @@ const ImageInputList = ({ imageUris = [], onRemoveImage, onAddImage }) => {
   const scrollView = useRef();
 
   return (
-    <View style={styles.mainContainer}>
+    <View>
       <ScrollView
         ref={scrollView}
         horizontal
@@ -32,9 +32,6 @@ const ImageInputList = ({ imageUris = [], onRemoveImage, onAddImage }) => {
 export default ImageInputList;
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    margin: 5,
-  },
   container: {
     flexDirection: "row",
   },
