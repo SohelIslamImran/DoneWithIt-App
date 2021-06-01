@@ -11,19 +11,20 @@ import Screen from "../components/Screen";
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
-    image: require("../assets/logo-red.png"),
+    title: "Sohel Islam Imran",
+    description: "Hey! Is this item still available?",
+    image: require("../assets/me.png"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
-    image: require("../assets/logo-red.png"),
+    title: "Sohel Islam Imran",
+    description:
+      "I'm interested in this item. When will you be able to post it?",
+    image: require("../assets/me.png"),
   },
 ];
 
-const MessageScreen = () => {
+const MessagesScreen = () => {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -64,6 +65,4 @@ const MessageScreen = () => {
   );
 };
 
-export default MessageScreen;
-
-const styles = StyleSheet.create({});
+export default MessagesScreen;

@@ -11,7 +11,7 @@ import AccountScreen from "./app/screens/AccountScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
-import MessageScreen from "./app/screens/MessageScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import AuthNavigator from "./app/navigation/AuthNavigator";

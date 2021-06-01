@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "500",
-    //marginBottom: 7,
   },
   price: {
     fontSize: 20,

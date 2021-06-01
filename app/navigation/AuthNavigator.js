@@ -7,7 +7,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const AuthNavigator = ({}) => {
+const AuthNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
