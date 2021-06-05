@@ -33,7 +33,7 @@ const ListingDetailsScreen = ({ route }) => {
           <Text style={styles.price}>${listing.price}</Text>
           <View style={styles.userContainer}>
             <ListItem
-              image={require("../assets/me.png")}
+              image={require("../assets/user.png")}
               title="Sohel Islam Imran"
               subTitle="5 Listings"
             />

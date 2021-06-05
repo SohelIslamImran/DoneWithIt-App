@@ -7,6 +7,7 @@ import messagesApi from "../../api/messages";
 import AppForm from "./AppForm";
 import AppFormField from "./AppFormField";
 import SubmitButton from "./SubmitButton";
+import logger from "../../utility/logger";
 
 const validationSchema = Yup.object().shape({
   message: Yup.string().required().min(1).label("Message"),
@@ -19,7 +20,7 @@ const ContactSellerForm = ({ listing }) => {
     const result = await messagesApi.send(message, listing.id);
 
     if (!result.ok) {
-      console.log("Error", result);
+      logger.log("Error", result);
       return Alert.alert("Error", "Could not send the message to the seller.");
     }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 
 import {
   ListItem,
@@ -13,14 +13,14 @@ const initialMessages = [
     id: 1,
     title: "Sohel Islam Imran",
     description: "Hey! Is this item still available?",
-    image: require("../assets/me.png"),
+    image: require("../assets/user.png"),
   },
   {
     id: 2,
     title: "Sohel Islam Imran",
     description:
       "I'm interested in this item. When will you be able to post it?",
-    image: require("../assets/me.png"),
+    image: require("../assets/user.png"),
   },
 ];
 
@@ -42,7 +42,6 @@ const MessagesScreen = () => {
             title={item.title}
             subTitle={item.description}
             image={item.image}
-            onPress={() => console.log(item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}

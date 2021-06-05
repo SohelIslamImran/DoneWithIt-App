@@ -37,7 +37,7 @@ const AccountScreen = ({ navigation }) => {
         <ListItem
           title={user.name}
           subTitle={user.email}
-          image={require("../assets/me.png")}
+          image={require("../assets/user.png")}
         />
       </View>
       <View style={styles.container}>

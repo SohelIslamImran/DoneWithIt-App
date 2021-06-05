@@ -22,12 +22,23 @@
     "android": {
       "useNextNotificationsApi": true,
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./app/assets/icon.png",
+        "backgroundColor": "#e63c4b"
       }
     },
-    "web": {
-      "favicon": "./app/assets/favicon.png"
+    "description": "A marketplace for selling the stuff you don't need anymore.",
+    "extra": {
+      "bugsnag": {
+        "apiKey": "51fa4671cd70fdabbd4adf039848f3d8"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
