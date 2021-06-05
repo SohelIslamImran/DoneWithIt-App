@@ -1,33 +1,47 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Image } from "react-native-expo-image-cache";
 
 import { ListItem } from "../components/lists";
 import colors from "../config/colors";
+import { ContactSellerForm } from "../components/forms";
 
 const ListingDetailsScreen = ({ route }) => {
   const listing = route.params;
 
   return (
-    <View>
-      <Image
-        style={styles.image}
-        preview={{ uri: listing.images[0].thumbnailUrl }}
-        tint="light"
-        uri={listing.images[0].url}
-      />
-      <View style={styles.details}>
-        <Text style={styles.title}>{listing.title}</Text>
-        <Text style={styles.price}>${listing.price}</Text>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("../assets/me.png")}
-            title="Sohel Islam Imran"
-            subTitle="5 Listings"
-          />
+    <ScrollView>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 30}
+      >
+        <Image
+          style={styles.image}
+          preview={{ uri: listing.images[0].thumbnailUrl }}
+          tint="light"
+          uri={listing.images[0].url}
+        />
+        <View style={styles.details}>
+          <Text style={styles.title}>{listing.title}</Text>
+          <Text style={styles.price}>${listing.price}</Text>
+          <View style={styles.userContainer}>
+            <ListItem
+              image={require("../assets/me.png")}
+              title="Sohel Islam Imran"
+              subTitle="5 Listings"
+            />
+          </View>
+          <ContactSellerForm listing={listing} />
         </View>
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 

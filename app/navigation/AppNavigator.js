@@ -8,11 +8,12 @@ import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 import useNotifications from "../hooks/useNotifications";
+import navigation from "./rootNavigation";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  useNotifications();
+  useNotifications(() => navigation.navigate("Account"));
 
   return (
     <Tab.Navigator>
