@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
 
 import {
   ListItem,
@@ -7,61 +7,67 @@ import {
   ListItemSeparator,
 } from "../components/lists";
 import Screen from "../components/Screen";
-
-const initialMessages = [
-  {
-    id: 1,
-    title: "Sohel Islam Imran",
-    description: "Hey! Is this item still available?",
-    image: require("../assets/user.png"),
-  },
-  {
-    id: 2,
-    title: "Sohel Islam Imran",
-    description:
-      "I'm interested in this item. When will you be able to post it?",
-    image: require("../assets/user.png"),
-  },
-];
+import useApi from "../hooks/useApi";
+import messagesApi from "../api/messages";
+import ErrorScreen from "./ErrorScreen";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 const MessagesScreen = () => {
-  const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
+  const {
+    data: messages,
+    setData,
+    error,
+    loading,
+    request: loadMessages,
+  } = useApi(messagesApi.get);
+
+  useEffect(() => {
+    loadMessages();
+    return () => setRefreshing(false);
+  }, [refreshing]);
 
   const handleDelete = (message) => {
-    setMessages(messages.filter((m) => m.id !== message.id));
+    setData(messages.filter((m) => m.id !== message.id));
   };
 
   return (
-    <Screen>
-      <FlatList
-        data={messages}
-        keyExtractor={(message) => message.id.toString()}
-        renderItem={({ item }) => (
-          <ListItem
-            title={item.title}
-            subTitle={item.description}
-            image={item.image}
-            renderRightActions={() => (
-              <ListItemDeleteAction onPress={() => handleDelete(item)} />
-            )}
-          />
-        )}
-        ItemSeparatorComponent={ListItemSeparator}
-        refreshing={refreshing}
-        onRefresh={() => {
-          setMessages([
-            {
-              id: 2,
-              title: "T2",
-              description: "D2",
-              image: require("../assets/logo-red.png"),
-            },
-          ]);
-        }}
-      />
-    </Screen>
+    <>
+      <ActivityIndicator visible={loading} />
+      <Screen>
+        <ErrorScreen
+          style={styles.error}
+          visible={error}
+          error="Couldn't retrieve the messages."
+          onPress={loadMessages}
+        />
+        <FlatList
+          data={messages}
+          keyExtractor={(message) => message.id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.fromUser.name}
+              subTitle={item.content}
+              image={require("../assets/user.png")}
+              renderRightActions={() => (
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              )}
+            />
+          )}
+          ItemSeparatorComponent={ListItemSeparator}
+          refreshing={refreshing}
+          onRefresh={() => setRefreshing(true)}
+        />
+      </Screen>
+    </>
   );
 };
 
 export default MessagesScreen;
+
+const styles = StyleSheet.create({
+  error: {
+    paddingHorizontal: 20,
+    marginBottom: 80,
+  },
+});

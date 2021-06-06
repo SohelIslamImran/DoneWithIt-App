@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
+
 import logger from "../utility/logger";
 
 export default useLocation = () => {

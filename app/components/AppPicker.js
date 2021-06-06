@@ -25,6 +25,8 @@ const AppPicker = ({
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
+  console.log(items);
+
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -38,7 +40,7 @@ const AppPicker = ({
             />
           )}
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem.label}</AppText>
+            <AppText style={styles.text}>{selectedItem.name}</AppText>
           ) : (
             <AppText style={styles.placeholder}>{placeholder}</AppText>
           )}
@@ -53,7 +55,7 @@ const AppPicker = ({
         <Button title="Close" onPress={() => setModalVisible(false)} />
         <FlatList
           data={items}
-          keyExtractor={({ value }) => value.toString()}
+          keyExtractor={({ id }) => id.toString()}
           numColumns={numberOfColumns}
           renderItem={({ item }) => (
             <PickerItemComponent
