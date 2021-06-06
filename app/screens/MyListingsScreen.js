@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
+import listingsApi from "../api/listings";
+import ActivityIndicator from "../components/ActivityIndicator";
 import {
   ListItem,
   ListItemDeleteAction,
@@ -8,27 +10,25 @@ import {
 } from "../components/lists";
 import Screen from "../components/Screen";
 import useApi from "../hooks/useApi";
-import messagesApi from "../api/messages";
 import ErrorScreen from "./ErrorScreen";
-import ActivityIndicator from "../components/ActivityIndicator";
 
-const MessagesScreen = () => {
+const MyListingsScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const {
-    data: messages,
+    data: myListings,
     setData,
     error,
     loading,
-    request: loadMessages,
-  } = useApi(messagesApi.get);
+    request: loadMyListings,
+  } = useApi(listingsApi.getMyListings);
 
   useEffect(() => {
-    loadMessages();
+    loadMyListings();
     return () => setRefreshing(false);
   }, [refreshing]);
 
-  const handleDelete = (message) => {
-    setData(messages.filter((m) => m.id !== message.id));
+  const handleDelete = ({ id }) => {
+    setData(myListings.filter((listing) => listing.id !== id));
   };
 
   return (
@@ -38,17 +38,17 @@ const MessagesScreen = () => {
         <ErrorScreen
           style={styles.error}
           visible={error}
-          error="Couldn't retrieve the messages."
-          onPress={loadMessages}
+          error="Couldn't retrieve the listings."
+          onPress={loadMyListings}
         />
         <FlatList
-          data={messages}
-          keyExtractor={(message) => message.id.toString()}
+          data={myListings}
+          keyExtractor={({ id }) => id.toString()}
           renderItem={({ item }) => (
             <ListItem
-              title={item.fromUser.name}
-              subTitle={item.content}
-              image={require("../assets/user.png")}
+              title={`$${item.price}`}
+              subTitle={item.title}
+              url={item.images[0].thumbnailUrl}
               renderRightActions={() => (
                 <ListItemDeleteAction onPress={() => handleDelete(item)} />
               )}
@@ -63,7 +63,7 @@ const MessagesScreen = () => {
   );
 };
 
-export default MessagesScreen;
+export default MyListingsScreen;
 
 const styles = StyleSheet.create({
   screen: {

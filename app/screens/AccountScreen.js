@@ -16,6 +16,7 @@ const menuItems = [
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
+    targetScreen: routes.MY_LISTINGS,
   },
   {
     id: "2",
@@ -73,6 +74,7 @@ export default AccountScreen;
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.light,
+    paddingTop: 0,
   },
   container: {
     marginVertical: 20,

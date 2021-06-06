@@ -9,6 +9,7 @@ import colors from "../../config/colors.js";
 const ListItem = ({
   title,
   subTitle,
+  url,
   image,
   IconComponent,
   onPress,
@@ -20,6 +21,7 @@ const ListItem = ({
         <View style={styles.container}>
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
+          {url && <Image style={styles.image} source={{ uri: url }} />}
           <View style={styles.details}>
             <AppText style={styles.title} numberOfLines={1}>
               {title}
