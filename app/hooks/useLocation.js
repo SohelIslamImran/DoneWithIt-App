@@ -9,12 +9,23 @@ export default useLocation = () => {
   const getLocation = async () => {
     try {
       const { granted } = await Location.requestForegroundPermissionsAsync();
-      if (!granted) return;
+      if (!granted) {
+        alert("You need to enable permission to access the location.");
+        return;
+      }
+
       const {
         coords: { latitude, longitude },
       } = await Location.getLastKnownPositionAsync();
       setLocation({ latitude, longitude });
     } catch (error) {
+      alert("Please turn on your location!");
+
+      const {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync({});
+      setLocation({ latitude, longitude });
+
       logger.log("Error getting location", error);
     }
   };

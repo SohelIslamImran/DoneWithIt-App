@@ -15,6 +15,7 @@ import useLocation from "../hooks/useLocation";
 import listingsApi from "../api/listings";
 import UploadScreen from "./UploadScreen";
 import categoriesApi from "../api/categories";
+import logger from "../utility/logger";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -35,19 +36,23 @@ const ListingEditScreen = () => {
   }, []);
 
   const handleSubmit = async (listing, { resetForm }) => {
-    setProgress(0);
-    setUploadVisible(true);
-    const { ok } = await listingsApi.addListing(
-      { ...listing, location },
-      (progress) => setProgress(progress)
-    );
+    try {
+      setProgress(0);
+      setUploadVisible(true);
+      const result = await listingsApi.addListing(
+        { ...listing, location },
+        (progress) => setProgress(progress)
+      );
 
-    if (!ok) {
-      setUploadVisible(false);
-      return alert("Could not save the listing");
+      if (!result.ok) {
+        setUploadVisible(false);
+        return alert("Could not save the listing");
+      }
+
+      resetForm();
+    } catch (error) {
+      logger.log("Error to post listings", error, result);
     }
-
-    resetForm();
   };
 
   return (
