@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 
 import logger from "./logger";
 

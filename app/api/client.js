@@ -4,7 +4,7 @@ import authStorage from "../auth/authStorage";
 import cache from "../utility/cache";
 
 const apiClient = create({
-  baseURL: "http://192.168.0.100:9000/api",
+  baseURL: "https://donewithitapp.herokuapp.com/api",
 });
 
 apiClient.addAsyncRequestTransform(async (request) => {
